@@ -5,15 +5,16 @@ import Model.SalePerson;
 
 public class SalePersonInput {
 	public static String showNameInput(){
-		String name = JOptionPane.showInputDialog("Enter the employee's name: ");
-		return name;
+		String first_name = JOptionPane.showInputDialog("Enter the employee's first name: ");
+		String last_name = JOptionPane.showInputDialog("Enter the employee's last name: ");
+		return first_name + " " + last_name;
 	}
 	public static int showItemInput(Item item){
 		int amount = Integer.parseInt(JOptionPane.showInputDialog("Enter amount for Item #" + item.getNumber() + "(price $" + item.getPrice() + ")" + ":"));
 		return amount;
 	}
 	public static void showTotal(SalePerson person){
-		JOptionPane.showMessageDialog(null, "Employee's Name:" + person.getName() + "\nTotal: $" + String.format("%10.2f", person.getTotalSale()));
+		JOptionPane.showMessageDialog(null, "Employee's Name: " + person.getName() + "\nTotal: $ " + String.format("%10.2f", person.getTotalSale()));
 	}
 	public static boolean continueProgram(){
 		boolean error = true;
