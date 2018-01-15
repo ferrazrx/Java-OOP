@@ -92,6 +92,10 @@ public class SalePersonInput {
 		String continueProgram = "";
 		while(error){
 			continueProgram = JOptionPane.showInputDialog("Continue calculating new employee's total income(Y/N)?");
+			if(continueProgram == null){
+				JOptionPane.showMessageDialog(null, "You exit the Program! Thanks for using it!");
+				return false;
+			}
 			switch(continueProgram){
 				case "y":
 				case "yes":
