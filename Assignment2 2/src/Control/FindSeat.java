@@ -3,7 +3,7 @@ package Control;
 import Model.Flight;
 import Model.Seat;
 
-public class FindSeatAvailable {
+public class FindSeat {
 
 	public static Seat findSeatAvailable(int flightclass, boolean windows, Flight flight){
 		
@@ -19,6 +19,21 @@ public class FindSeatAvailable {
 							System.out.println(seatFound.toString());
 						}
 					}
+				}
+			}
+		}
+		return seatFound;
+	}
+	
+public static Seat checkSeatAvailability(Flight flight){
+		
+		Seat seatFound = null;
+		
+		for(int i=0; i<flight.getRows();i++){
+			for(int j=0; j<flight.getSeatPerRow();j++){
+				Seat[][] seat = flight.getSeats();
+				if(!seat[i][j].isOccupied()){
+					seatFound = seat[i][j];
 				}
 			}
 		}
