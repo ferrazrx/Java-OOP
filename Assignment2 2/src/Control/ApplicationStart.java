@@ -18,26 +18,31 @@ public class ApplicationStart {
 			}else{
 				String name = output.printGetName();
 				int classOption = output.printClassOptions();
-				boolean windowsOption = output.printSeatOptions();
-				
-				
-				Seat seat = FindSeat.findSeatAvailable(classOption, windowsOption, flight);
-				
-				if(seat == null){
-					output.printPlaneSeats(flight);
-				}else{
-				
-					int confirm = output.printPlaneSeats(flight, seat.getPosition());
-				
-					if(confirm == 0){
-						seat.setOccupied(true);
-						seat.setPassangerName(name);
-						output.printTicket(seat);
-					}else{
-						output.printCanceledMessage();
+				if(classOption != 0){
+					String windowsOption = output.printWindowsOptions();
+					if(windowsOption != null){
+						boolean windows = windowsOption == "Y"? true : false;
+						Seat seat = FindSeat.findSeatAvailable(classOption, windows, flight);
+						
+						if(seat == null){
+							output.printPlaneSeats(flight);
+						}else{
+						
+							int confirm = output.printPlaneSeats(flight, seat.getPosition());
+						
+							if(confirm == 0){
+								seat.setOccupied(true);
+								seat.setPassangerName(name);
+								output.printTicket(seat);
+								continueProgram = output.continueProgram(flight);
+							}else{
+								output.printCanceledMessage();
+							}
+						}
 					}
 				}
-			}
+			}		
+				
 		}while(continueProgram);	
 		
 	}
