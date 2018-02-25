@@ -58,5 +58,17 @@ public class Flight {
 	public Seat getSeat(int row, int column){
 		return this.seats[row][column];
 	}
+	public String getPassangers(){
+		String message = "";
+		for(int i = 0; i<rows; i++){
+			for(int j = 0; j<seatPerRow; j++){
+				String name = this.seats[i][j].getPassangerName();
+				if(name != null){
+					message += name  + " - Seat(Row:" + (i+1)+ " Column:" +(j+1) +")\n";			
+				}
+			}
+		}
+		return message;
+	}
 
 }
