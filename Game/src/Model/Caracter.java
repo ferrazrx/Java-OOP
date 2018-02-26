@@ -12,6 +12,18 @@ public abstract class Caracter {
 	private String img;
 	private String background;
 	
+	public Caracter(String name, int lifePoints, ArrayList<Item> items, float money, int attackPoints,
+			int defensePoints, String img, String bg) {
+		this.name = name;
+		this.lifePoints = lifePoints;
+		this.items = items;
+		this.money = money;
+		this.attackPoints = attackPoints;
+		this.defensePoints = defensePoints;
+		this.img = img;
+		this.background = bg;
+	}
+	
 	public String getBackground() {
 		return background;
 	}
@@ -30,18 +42,6 @@ public abstract class Caracter {
 
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
-	}
-
-	public Caracter(String name, int lifePoints, ArrayList<Item> items, float money, int attackPoints,
-			int defensePoints, String img, String bg) {
-		this.name = name;
-		this.lifePoints = lifePoints;
-		this.items = items;
-		this.money = money;
-		this.attackPoints = attackPoints;
-		this.defensePoints = defensePoints;
-		this.img = img;
-		this.background = bg;
 	}
 	
 	public String getName() {

@@ -35,12 +35,12 @@ public class CalculateBattle {
 				int villainDefensePoints = villain.getDefensePoints();
 				
 				if(playerDice > villainDice){
-					playerAttack = (playerAttackPoints > villainDefensePoints)? playerAttackPoints : 10;
+					playerAttack = (playerAttackPoints > villainDefensePoints)? playerAttackPoints : 100;
 					int villainNewLife = ((villain.getLifePoints() - playerAttack) < 0) ? 0 : villain.getLifePoints() - playerAttack;
 					playerWinner = (villainNewLife == 0) ? 1 : 0 ;
 					villain.setLifePoints(villainNewLife);
 				}else{
-					villainAttack = (villainAttackPoints > playerDefensePoints)? villainDefensePoints : 10;
+					villainAttack = (villainAttackPoints > playerDefensePoints)? villainDefensePoints : 100;
 					int playerNewLife = ((player.getLifePoints() - villainAttack) < 0) ? 0:  player.getLifePoints() - villainAttack;
 					villainWinner = (playerNewLife == 0) ? 1 : 0;
 					player.setLifePoints(playerNewLife);
@@ -55,5 +55,20 @@ public class CalculateBattle {
 		
 		player.setLifePoints(CalculateBattle.playerLifePoints);
 		villain.setLifePoints(CalculateBattle.villainLifePoints);
+	}
+	
+	public float payPlayer(Game game,int villainNumber){
+		Player player = game.getPlayer();
+		Villain villain = game.getVillains()[villainNumber];
+		player.setMoney(player.getMoney() + villain.getMoney());
+		return villain.getMoney();
+	}
+	public float chargePlayer(Game game, int villainNumber){
+		Player player = game.getPlayer();
+		Villain villain = game.getVillains()[villainNumber];
+		player.setMoney(player.getMoney() - 50);
+		villain.setMoney(villain.getMoney() + 50);
+		
+		return 50;
 	}
 }

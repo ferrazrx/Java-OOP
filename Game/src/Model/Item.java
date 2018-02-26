@@ -7,17 +7,9 @@ public class Item {
 	private float price;
 	private String description;
 	private int amount;
+	private String img;
 	
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public Item(String name, int attackPoints, int defensePoints, float price, String description) {
+	public Item(String name, int attackPoints, int defensePoints, float price, String description, String img) {
 		super();
 		this.name = name;
 		this.attackPoints = attackPoints;
@@ -25,6 +17,23 @@ public class Item {
 		this.price = price;
 		this.description = description;
 		this.amount = 0;
+		this.img = img;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	
 	public String getDescription() {
@@ -59,7 +68,4 @@ public class Item {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
-	
-
 }

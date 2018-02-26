@@ -10,10 +10,13 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="Model.Item"/>
 <fullyQualifiedTypeName name="Control.CreateGuest"/>
-<fullyQualifiedTypeName name="Model.Game"/>
 <fullyQualifiedTypeName name="Control.CreateBattle"/>
 <fullyQualifiedTypeName name="Model.Player"/>
 <fullyQualifiedTypeName name="Model.Villain"/>
 <fullyQualifiedTypeName name="Model.Arena"/>
 <fullyQualifiedTypeName name="Control.CalculateBattle"/>
+<fullyQualifiedTypeName name="Model.Game"/>
+<fullyQualifiedTypeName name="Control.PurchaseItem"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>

@@ -3,6 +3,7 @@ package View;
 import Control.CalculateBattle;
 import Control.CreateHeroes;
 import Control.NewGame;
+import Control.PurchaseItem;
 import Model.Game;
 import Model.Heroe;
 
@@ -12,6 +13,8 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -20,12 +23,14 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import javax.swing.JTable;
+
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
-import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 public class GameFrame extends JFrame {
 
@@ -70,6 +75,22 @@ public class GameFrame extends JFrame {
 	private JLabel heroLifePointsValue;
 	private JLabel villainLifePointsValue;
 	private JLabel arenaBg;
+	private JLabel storeGold;
+	private JRadioButton rdbtnItemOne;
+	private JRadioButton radioButtonTwo;
+	private JRadioButton radioButtonThree;
+	private JLabel storeBg;
+	private JTextPane descriptionItem1;
+	private JTextPane descriptionItem2;
+	private JTextPane descriptionItem3;
+	private JLabel priceItem1;
+	private JLabel priceItem2;
+	private JLabel priceItem3;
+	private JLabel imgItem1;
+	private JLabel imgItem2;
+	private JLabel imgItem3;
+	private JLabel status;
+	private JPanel tableContainer;
 
 	/**
 	 * Launch the application.
@@ -82,6 +103,7 @@ public class GameFrame extends JFrame {
 					heroes = CreateHeroes.showHeroes();
 				    frame = new GameFrame();
 					frame.setVisible(true);
+					//System.out.println(heroes[0].getItems().get(0).getName());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,7 +136,9 @@ public class GameFrame extends JFrame {
 				refreshComponents();
 				newGame.setVisible(false);
 				dashboard.setVisible(true);
-				
+				villainCount = 0;
+				createStore();
+				createInventory();
 			}
 		});
 		btnNewGame.setBounds(282, 410, 110, 29);
@@ -295,17 +319,24 @@ public class GameFrame extends JFrame {
 		lblInventory.setBounds(73, 5, 59, 16);
 		inventory.add(lblInventory);
 		
-		table = new JTable();
-		table.setBounds(16, 33, 177, 123);
-		inventory.add(table);
+	
 		
 		JButton btnGoToThe = new JButton("Store");
 		btnGoToThe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				store.setVisible(true);
+				newGame.setVisible(false);
+				arenaView.setVisible(false);
+				dashboard.setVisible(false);	
+				storeGold.setText(Float.toString(game.getPlayer().getMoney()) + " gold");
 			}
 		});
 		btnGoToThe.setBounds(58, 166, 98, 29);
 		inventory.add(btnGoToThe);
+		
+		tableContainer = new JPanel();
+		tableContainer.setBounds(6, 32, 198, 122);
+		inventory.add(tableContainer);
 		
 		JPanel InfoPanel = new JPanel();
 		InfoPanel.setBounds(228, 6, 445, 220);
@@ -394,6 +425,19 @@ public class GameFrame extends JFrame {
 		store.setLayout(null);
 		
 		JButton btnBuyItem = new JButton("Buy Item");
+		btnBuyItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int item1 = rdbtnItemOne.isSelected()? 1: 0;
+				int item2 = radioButtonTwo.isSelected()? 1: 0;
+				int item3 = radioButtonThree.isSelected()? 1: 0;
+				
+				boolean purchaseStatus = PurchaseItem.process(game, item1, item2, item3);
+				
+				showPurchaseStatus(purchaseStatus);
+				storeGold.setText(Float.toString(game.getPlayer().getMoney()) + " gold");
+
+			}
+		});
 		btnBuyItem.setBounds(48, 410, 117, 29);
 		store.add(btnBuyItem);
 		
@@ -412,39 +456,97 @@ public class GameFrame extends JFrame {
 		lblGold.setBounds(500, 6, 61, 16);
 		storeMainTitle.add(lblGold);
 		
-		JLabel storeGold = new JLabel("New label");
+		storeGold = new JLabel("New label");
 		storeGold.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
 		storeGold.setBounds(541, 6, 132, 35);
 		storeMainTitle.add(storeGold);
 		
 		JPanel storeOptions = new JPanel();
-		storeOptions.setBounds(216, 75, 444, 335);
+		storeOptions.setBounds(29, 75, 631, 335);
 		store.add(storeOptions);
 		storeOptions.setLayout(null);
 		
-		JRadioButton rdbtnItemOne = new JRadioButton("Item1");
+		rdbtnItemOne = new JRadioButton("Item1");
 		rdbtnItemOne.setFont(new Font("Oswald Stencil", Font.PLAIN, 20));
 		rdbtnItemOne.setBounds(6, 6, 370, 23);
 		storeOptions.add(rdbtnItemOne);
 		
-		JRadioButton radioButtonTwo = new JRadioButton("Item2");
+		radioButtonTwo = new JRadioButton("Item2");
 		radioButtonTwo.setFont(new Font("Oswald Stencil", Font.PLAIN, 20));
 		radioButtonTwo.setBounds(6, 113, 370, 23);
 		storeOptions.add(radioButtonTwo);
 		
-		JRadioButton radioButtonThree = new JRadioButton("Item3");
+		radioButtonThree = new JRadioButton("Item3");
 		radioButtonThree.setFont(new Font("Oswald Stencil", Font.PLAIN, 20));
 		radioButtonThree.setBounds(6, 228, 370, 23);
 		storeOptions.add(radioButtonThree);
 		
+		descriptionItem1 = new JTextPane();
+		descriptionItem1.setBounds(16, 31, 422, 73);
+		storeOptions.add(descriptionItem1);
+		
+		descriptionItem2 = new JTextPane();
+		descriptionItem2.setBounds(16, 143, 422, 73);
+		storeOptions.add(descriptionItem2);
+		
+		descriptionItem3 = new JTextPane();
+		descriptionItem3.setBounds(16, 256, 422, 73);
+		storeOptions.add(descriptionItem3);
+		
+		priceItem1 = new JLabel("New label");
+		priceItem1.setBounds(377, 14, 61, 16);
+		storeOptions.add(priceItem1);
+		
+		priceItem2 = new JLabel("New label");
+		priceItem2.setBounds(377, 121, 61, 16);
+		storeOptions.add(priceItem2);
+		
+		priceItem3 = new JLabel("New label");
+		priceItem3.setBounds(377, 236, 61, 16);
+		storeOptions.add(priceItem3);
+		
+		imgItem1 = new JLabel("");
+		imgItem1.setHorizontalAlignment(SwingConstants.CENTER);
+		imgItem1.setBounds(450, 16, 150, 100);
+		storeOptions.add(imgItem1);
+		
+		imgItem2 = new JLabel("");
+		imgItem2.setHorizontalAlignment(SwingConstants.CENTER);
+		imgItem2.setBounds(450, 121, 150, 100);
+		storeOptions.add(imgItem2);
+		
+		imgItem3 = new JLabel("");
+		imgItem3.setHorizontalAlignment(SwingConstants.CENTER);
+		imgItem3.setBounds(450, 228, 150, 100);
+		storeOptions.add(imgItem3);
+		
 		JButton btnBackToGame = new JButton("Back to Game");
+		btnBackToGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dashboard.setVisible(true);
+				store.setVisible(false);
+				arenaView.setVisible(false);
+				newGame.setVisible(false);
+				moneyAmount.setText(Float.toString(game.getPlayer().getMoney()));
+				createInventory();
+				status.setText("");
+				attackPointsInfo.setText(Integer.toString(game.getPlayer().getAttackPoints()) + " P");
+				defensePointsInfo.setText(Integer.toString(game.getPlayer().getDefensePoints()) + " P");
+			}
+		});
 		btnBackToGame.setBounds(562, 410, 117, 29);
 		store.add(btnBackToGame);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("/Users/mbp/Documents/NSCC/OOP/Prog1400---OOP/Game/bg_batman.jpg"));
-		lblNewLabel_4.setBounds(0, 0, 689, 445);
-		store.add(lblNewLabel_4);
+		status = new JLabel("");
+		status.setForeground(Color.RED);
+		status.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		status.setHorizontalAlignment(SwingConstants.CENTER);
+		status.setBounds(213, 415, 281, 24);
+		store.add(status);
+		
+		storeBg = new JLabel("");
+		storeBg.setBounds(0, 0, 689, 445);
+		store.add(storeBg);
 		
 		arenaView = new JPanel();
 		contentPane.add(arenaView, "name_3856763102410");
@@ -508,6 +610,8 @@ public class GameFrame extends JFrame {
 				arenaView.setVisible(false);
 				newGame.setVisible(false);
 				store.setVisible(false);
+				
+				moneyAmount.setText(Float.toString(game.getPlayer().getMoney()));
 			}
 		});
 		btnBackToGame_1.setBounds(109, 319, 117, 29);
@@ -604,13 +708,15 @@ public class GameFrame extends JFrame {
 		    	int[] results = turn.calculateTurn(game, villainCount);
 		    	
 		    	if(results[4] != 0){
-		    		String message = game.getPlayer().getName() + " won the battle!";
+		    		float money = turn.payPlayer(game, villainCount);
+		    		String message = game.getPlayer().getName() + " won the battle! You reveived " + money +" gold.";
 		    		battleInfo.setText(message);
 		    		turn.resetPointsLife(game, villainCount);
 		    		villainLifePointsValue.setText("0");	
 		    		timer.stop();
 		    	} else if(results[5] !=0){
-		    		String message = game.getVillains()[villainCount].getName() + " won the battle!";
+		    		float money = turn.chargePlayer(game, villainCount);
+		    		String message = game.getVillains()[villainCount].getName() + " won the battle! You lost " + money + " gold.";
 		    		battleInfo.setText(message);
 		    		heroLifePointsValue.setText("0");
 		    		turn.resetPointsLife(game, villainCount);
@@ -636,5 +742,55 @@ public class GameFrame extends JFrame {
 		ArenaVillainTitle.setText(game.getVillains()[villainCount].getName());
 		heroLifePointsValue.setText(Integer.toString(game.getPlayer().getLifePoints()));
 		villainLifePointsValue.setText(Integer.toString(game.getVillains()[villainCount].getLifePoints()));	
+	}
+	
+	public void createStore(){
+		storeBg.setIcon(new ImageIcon(basePath + game.getPlayer().getBackground()));
+		rdbtnItemOne.setText(game.getPlayer().getItems().get(0).getName());
+		radioButtonTwo.setText(game.getPlayer().getItems().get(1).getName());
+		radioButtonThree.setText(game.getPlayer().getItems().get(2).getName());
+		
+		
+		descriptionItem1.setText(game.getPlayer().getItems().get(0).getDescription());
+		descriptionItem2.setText(game.getPlayer().getItems().get(1).getDescription());
+		descriptionItem3.setText(game.getPlayer().getItems().get(2).getDescription());
+		
+		priceItem1.setText("$" + Float.toString(game.getPlayer().getItems().get(0).getPrice()));
+		priceItem2.setText("$" + Float.toString(game.getPlayer().getItems().get(1).getPrice()));
+		priceItem3.setText("$" + Float.toString(game.getPlayer().getItems().get(2).getPrice()));
+		
+		imgItem1.setIcon(new ImageIcon(basePath + game.getPlayer().getItems().get(0).getImg()));
+		imgItem2.setIcon(new ImageIcon(basePath + game.getPlayer().getItems().get(1).getImg()));
+		imgItem3.setIcon(new ImageIcon(basePath + game.getPlayer().getItems().get(2).getImg()));
+	}
+	public void showPurchaseStatus(boolean purchaseStatus){
+		if(purchaseStatus){
+			status.setForeground(Color.GREEN);
+			status.setText("You purchase the items! Congratulations!");
+		}else{
+			status.setForeground(Color.RED);
+			status.setText("You don't have enough money to buy this item(s).");
+		}
+	}
+	public void createInventory(){
+		tableContainer.removeAll();
+		String[] titles = {"Item","Amount"};
+		Object[][] data = {{game.getPlayer().getItems().get(0).getName() ,Integer.toString(game.getPlayer().getItems().get(0).getAmount())},
+				           {game.getPlayer().getItems().get(1).getName(), Integer.toString(game.getPlayer().getItems().get(1).getAmount())},
+				           {game.getPlayer().getItems().get(2).getName(), Integer.toString(game.getPlayer().getItems().get(2).getAmount())}
+		};
+		table = new JTable(data, titles);
+		table.setSurrendersFocusOnKeystroke(true);
+		table.setFillsViewportHeight(true);
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		table.setBackground(Color.ORANGE);
+		table.setBounds(16, 33, 177, 123);
+		table.setFillsViewportHeight(true);
+		
+		tableContainer.setLayout(new BorderLayout());
+		tableContainer.add(table.getTableHeader(), BorderLayout.PAGE_START);
+		tableContainer.add(table, BorderLayout.CENTER);
 	}
 }
