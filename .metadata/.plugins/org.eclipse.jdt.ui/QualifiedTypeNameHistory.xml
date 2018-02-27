@@ -2,7 +2,27 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Objects"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+=======
+<fullyQualifiedTypeName name="Model.Store"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="Model.Heroe"/>
+<fullyQualifiedTypeName name="Control.CreateHeroes"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Model.Item"/>
+<fullyQualifiedTypeName name="Control.CreateGuest"/>
+<fullyQualifiedTypeName name="Control.CreateBattle"/>
+<fullyQualifiedTypeName name="Model.Player"/>
+<fullyQualifiedTypeName name="Model.Villain"/>
+<fullyQualifiedTypeName name="Model.Arena"/>
+<fullyQualifiedTypeName name="Control.CalculateBattle"/>
+<fullyQualifiedTypeName name="Model.Game"/>
+<fullyQualifiedTypeName name="Control.PurchaseItem"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+>>>>>>> a956669ae226186d338524c74b39104f42b18985
 </qualifiedTypeNameHistroy>
