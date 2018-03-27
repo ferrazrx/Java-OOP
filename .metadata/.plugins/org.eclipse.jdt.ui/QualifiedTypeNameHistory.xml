@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="Model.Heroe"/>
 <fullyQualifiedTypeName name="Control.CreateHeroes"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="Model.Item"/>
 <fullyQualifiedTypeName name="Control.CreateGuest"/>
 <fullyQualifiedTypeName name="Control.CreateBattle"/>
@@ -19,4 +18,8 @@
 <fullyQualifiedTypeName name="Control.PurchaseItem"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+<fullyQualifiedTypeName name="Control.Controller"/>
+<fullyQualifiedTypeName name="Model.Animal"/>
+<fullyQualifiedTypeName name="Model.Penguin"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
