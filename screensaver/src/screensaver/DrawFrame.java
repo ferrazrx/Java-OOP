@@ -33,12 +33,20 @@ public class DrawFrame extends JPanel {
 		
 		Shape circle = (Shape) new Circle(g);
 		Shape square = (Shape) new Square(g);
+		Shape line = (Shape) new Line(g);
 		
 		circle.draw(0,0);
 		circle.move(this);
 		
 		square.draw(0,0);
 		square.move(this);
+		
+		line.draw(this.getWidth(),0);
+		line.move(this);
+		
+		Shape star = (Shape) new Star(g);
+		star.draw(0,0);
+		star.move(this);
 		
 	}
 	

@@ -23,7 +23,7 @@ public class Circle extends Shape {
 	public void draw(int position_x, int position_y) {
 		Graphics g = this.getG();
 		g.setColor(this.getRandomColor());
-		g.fillArc(x, y, size, size, 360, 360);
+		g.fillArc(x, y, x, x, 360, 360);
 	}
 
 	public void move(JPanel panel) {
@@ -35,7 +35,7 @@ public class Circle extends Shape {
 		if(x < 0){
 			direction_x = "forward";
 		}
-		if(x > panel.getWidth() - 100){
+		if(x > panel.getWidth() - x){
 			direction_x = "backwards";
 		}
 		
@@ -47,7 +47,7 @@ public class Circle extends Shape {
 		if(y < 0){
 			direction_y = "down";
 		}
-		if(y > panel.getHeight() - 100){
+		if(y > panel.getHeight() - x){
 			direction_y = "up";
 		}
 	}
