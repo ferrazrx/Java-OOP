@@ -108,7 +108,7 @@ public class Controller {
 			String animalWeightValue, String animalGpsValue, String bloodPresure) throws IOException {
 			GPS gps = new GPS();
 			gps.addCoordinate(animalGpsValue);
-			Animal penguin = new Penguin(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, Double.parseDouble(bloodPresure));
+			Animal penguin = (Animal) new Penguin(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, Double.parseDouble(bloodPresure));
 			file.saveStringIntoFile("report", penguin.toString());
 			return penguin;
 	}
@@ -116,7 +116,7 @@ public class Controller {
 			String animalWeightValue, String animalGpsValue, String spots) throws IOException {
 			GPS gps = new GPS();
 			gps.addCoordinate(animalGpsValue);
-			Animal seaLion = new SeaLion(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, Integer.parseInt(spots));
+			Animal seaLion = (Animal) new SeaLion(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, Integer.parseInt(spots));
 			file.saveStringIntoFile("report", seaLion.toString());
 			return seaLion;
 	}
@@ -124,7 +124,7 @@ public class Controller {
 			String animalWeightValue, String animalGpsValue, String dentalCondition) throws IOException {
 			GPS gps = new GPS();
 			gps.addCoordinate(animalGpsValue);
-			Animal walrus = new Walrus(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, dentalCondition);
+			Animal walrus = (Animal) new Walrus(animalTypeName, animalSpecieName, animalSexValue, Double.parseDouble(animalWeightValue), gps, dentalCondition);
 			file.saveStringIntoFile("report", walrus.toString());
 			return walrus;
 	}

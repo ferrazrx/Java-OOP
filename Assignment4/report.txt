@@ -1,0 +1,1 @@
+Penguin:[ specie= test, sex= Masculine, weight= 6.7, gpsCordinate= 1.000, 0.000, bloodPresure= 12.0] end Sea Lion:[ specie=testone, sex=Feminine, weight=1.2, gpsCordinate=1.0, 5.0, spots=2] end Walrus:[ specie=testtwo, sex=Masculine, weight=1.2, gpsCordinate=1.1, 9.0, dentalStatus=Average] end 

@@ -22,4 +22,5 @@
 <fullyQualifiedTypeName name="Model.Animal"/>
 <fullyQualifiedTypeName name="Model.Penguin"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
 </qualifiedTypeNameHistroy>
